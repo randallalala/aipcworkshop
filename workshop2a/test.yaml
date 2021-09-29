@@ -1,0 +1,15 @@
+- name: test
+  hosts:  all
+  vars: 
+    line: "2021 a temp password is genereated for root@localhose: p@#*&VFKSJ"
+    user_name: randall
+  tasks:
+  - name: extract password
+    set fact: 
+    # var greeting  =  "my name is ..."
+      greetings: {{ user_name}}
+      default_password: {{ line.split (':')[]}
+  
+  - name: echo greetings
+    debug:
+      msg: {{ default_password }}

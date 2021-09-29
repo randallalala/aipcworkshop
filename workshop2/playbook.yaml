@@ -1,0 +1,22 @@
+- name: connectivity test
+  hosts: all 
+  vars: 
+    a_name: fred
+  tasks:
+    - name: ping
+      ping: ~
+    - name: install nginx
+        debug:
+          msg: " {{ a_name | anon }}"
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+      - nginx
+      - python3.8
+      - python3-pip
+    - name : enable and start eginx
+      systemd:
+        name: nginx
+        enabled: yes
+        state: started
