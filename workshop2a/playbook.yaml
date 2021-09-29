@@ -81,16 +81,21 @@
       group: mysql
       state: link
 
-- name:  craet a symbolic link
-    file:
-      src: "{{ download_dir }}/{{ mysql_dir }}"
-      owner: mysql
-      group: mysql
-      state: link
-
 # install sql and do conf
 
 - name: generate my.cnf in etc/my.cnf
   template:
     src: ./my.cnf.j2
     dest: /etc/my.cnf
+
+- name: generate  the sql script to change the root pw 
+  template:
+    src: ./change_root_password.sql.j2
+    dest: "{{ download_dir }}/change_root_password.sql"
+    mode: '0400'
+
+
+- name: cahge the root password
+  shell:
+    chdir: ./my.cnf.j2
+    cmd: "bin/mysql -uroot -p'{{ generated_password}}' --connect-expired-password < {{ download_dir }}/change_root_password.sql"
