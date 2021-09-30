@@ -15,7 +15,7 @@ variable DO_size {
             default = "s-1vcpu-1gb"
 }
 
-variable DO_image {
+    variable DO_image {
             type = string
             default = "ubuntu-20-04-x64"
 }
@@ -36,8 +36,11 @@ build {
         "source.digitalocean.mysql8_image"
     ]
 
-    provisioner ansible{
-
+    provisioner ansible {
+        playbook_file = "./playbook.yaml"
+        extra_arguments = [
+            "-e", "mysql_root_password=${var.MYSQL_root_password}"
+        ]
         
     }
 }

@@ -7,4 +7,5 @@ all:
   # hosts:
   #   myserver:
   #     ansible_host: xx.xx.xx.xx
+  #ANSIBLE VAULT
  

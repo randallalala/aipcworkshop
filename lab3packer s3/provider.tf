@@ -14,13 +14,13 @@ terraform {
     endpoint                    = "sgp1.digitaloceanspaces.com"
     key                         = "workshop3/terraform.tfstate"
     bucket                      = "aipc"
-    region                      = "sgp1"
+    skip_requesting_region      = true
     skip_requesting_account_id  = true
     skip_credentials_validation = true
     skip_get_ex2_plaforms       = true
     skip_metadata_api_check     = true
-    access_key = "value"
-    secret_key = "value"
+    access_key                  = "value"
+    secret_key                  = "value"
   }
 }
 

@@ -1,0 +1,20 @@
+- name: test
+  hosts:  all
+  vars: 
+    line: "2021-09-29T00:58:28.097940Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost:  a temp password is genereated for root@localhose: p@#*&VFKSJ"
+    user_name: randall
+  tasks:
+  - name: extract password
+    set fact: 
+    # var greeting  =  "my name is ..."
+      greetings: "{{ user_name }}"
+      default_password: "{{ line.split (':')[-1] | trim }}" # taking the last item in array
+  
+
+  - name: line
+    debug:
+      msg: "{{ line }}"
+
+  - name: echo greetings
+    debug:
+      msg: {{ default_password }}
